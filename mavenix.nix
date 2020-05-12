@@ -1,8 +1,8 @@
 {
   pkgs ? import (fetchGit {
     url = "https://github.com/NixOS/nixpkgs-channels";
-    ref = "nixos-19.09";
-    rev = "c75de8bc12cc7e713206199e5ca30b224e295041";
+    ref = "nixos-20.03";
+    rev = "5adf2a6c11646898742b0c08f7e94101620ba707";
   }) {},
 }:
 
