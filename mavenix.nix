@@ -199,7 +199,7 @@ let
         makeWrapper ${maven}/bin/mvn $out/bin/mvn --add-flags "--settings ${settings}"
       '';
 
-      mvn = "${maven'}/bin/mvn -X --offline --batch-mode -Dmaven.repo.local=${repo} -nsu ";
+      mvn = "${maven'}/bin/mvn --offline --batch-mode -Dmaven.repo.local=${repo} -nsu ";
 
     in
       stdenv.mkDerivation ({
