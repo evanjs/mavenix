@@ -25,7 +25,15 @@ EOF
 # Setup work dir and cleanup
 WORK_DIR=$(mktemp -d --tmpdir mvnix-update.XXXXXX)
 cleanup() { { chmod -R +w "$WORK_DIR"; rm -rf "$WORK_DIR"; } || true; }
-backup() { { tlock="/tmp/mavenix.lock"; cp "$tmp_lock_file" $tlock; echo "Lockfile has been saved to $tlock"; } }
+backup() { {
+	if [[ -f "$tmp_lock_file" ]]; then
+		tlock="/tmp/mavenix.lock";
+		cp "$tmp_lock_file" $tlock;
+		echo "Lockfile has been saved to $tlock";
+		cp -r "$WORK_DIR" /tmp/mvnix-bak;
+		echo "Saved working directory "$WORK_DIR" to /tmp/mvnix-bak";
+	fi
+} || true; }
 trap 'trap - EXIT; backup; cleanup; kill -- $$' EXIT
 
 # Default values
