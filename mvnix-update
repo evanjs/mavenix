@@ -124,7 +124,7 @@ mvn_ >&2 install -Dmaven.test.skip.exec=true -DskipTests -Dmaven.repo.local="$tm
 echo >&2 "
   Getting project info...
 "
-pom=$(mvn_out help:effective-pom | grep -v '^\[\|^Effective \|^$' | xq -c .)
+pom=$(mvn_out help:effective-pom | |grep -v '^\[\|^Effective \|\[INFO\|\[WARNING\|Downloading^$' | xq -c .)
 projects=$(jq -c '.projects.project // [.project]' <<<"$pom")
 pq() { jq -rc "$1" <<<"$projects"; }
 export -f pq
